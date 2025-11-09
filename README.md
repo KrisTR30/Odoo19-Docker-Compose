@@ -73,6 +73,6 @@ Puedes modificar las contraseñas en el archivo docker-compose.yml si lo deseas.
 El servicio de backup usa el mismo usuario y contraseña de la base de datos principal (odoo).
 
 # 👤 Autor
-Creado con ❤️ por Kris Tello
-📧 krisfab.tello.30@gmail.com
-🌐 linkedin.com/in/kris-tello
+Creado con ❤️ por Kris Tello <br>
+📧 krisfab.tello.30@gmail.com <br>
+🌐 https://www.linkedin.com/in/kris-tello <br>
