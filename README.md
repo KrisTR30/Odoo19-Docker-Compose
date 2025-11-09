@@ -67,10 +67,10 @@ odoo-docker <br>
    (Opcional) Verifica los backups automáticos en la carpeta ./backups/
 
 ## Notas importantes
-Asegúrate de que los puertos 8069 y 5050 estén libres antes de iniciar.
-Todos los datos se guardan de forma persistente gracias a los volúmenes de Docker.
-Puedes modificar las contraseñas en el archivo docker-compose.yml si lo deseas.
-El servicio de backup usa el mismo usuario y contraseña de la base de datos principal (odoo).
+Asegúrate de que los puertos 8069 y 5050 estén libres antes de iniciar. <br>
+Todos los datos se guardan de forma persistente gracias a los volúmenes de Docker. <br>
+Puedes modificar las contraseñas en el archivo docker-compose.yml si lo deseas. <br>
+El servicio de backup usa el mismo usuario y contraseña de la base de datos principal (odoo19). <br>
 
 # 👤 Autor
 Creado con ❤️ por Kris Tello <br>
