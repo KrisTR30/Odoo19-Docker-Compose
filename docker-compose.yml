@@ -1,0 +1,56 @@
+services:
+db:
+image: postgres:16
+container_name: odoo19-db
+environment:
+- POSTGRES_DB=postgres
+- POSTGRES_USER=odoo
+- POSTGRES_PASSWORD=odoo # Cambiar la contraseña
+volumes:
+- ./postgres_data:/var/lib/postgresql/data
+restart: always
+
+odoo:
+image: odoo:19
+container_name: odoo19
+depends_on:
+- db
+ports:
+- "8069:8069"
+environment:
+- HOST=db
+- USER=odoo
+- PASSWORD=odoo  # Debe ser la misma que la del servicio db
+volumes:
+- ./odoo_data:/var/lib/odoo
+restart: always
+
+pgadmin:
+image: dpage/pgadmin4
+container_name: pgadmin
+depends_on:
+- db
+environment:
+- PGADMIN_DEFAULT_EMAIL=admin@admin.com  # Cambiar el correo
+- PGADMIN_DEFAULT_PASSWORD=admin # Cambiar la contraseña
+ports:
+- "5050:80"
+volumes:
+- ./pgadmin_data:/var/lib/pgadmin
+restart: always
+
+backup:
+image: postgres:16
+container_name: odoo19-backup
+depends_on:
+- db
+environment:
+- PGPASSWORD=odoo # Debe ser la misma que la del servicio db
+volumes:
+- ./backups:/backups
+entrypoint: >
+  bash -c "while true; do
+    pg_dump -h db -U odoo -Fc postgres > /backups/odoo_backup_$(date +%Y-%m-%d_%H-%M).dump;
+    sleep 604800; # Cambiar la cantidad de segundo dependiendo a tus necesidades (Actualmente esta en 7 dias)
+  done"
+restart: always
