@@ -126,8 +126,7 @@ Incluye:
 - **Imagen:** `postgres:16`
 - **Frecuencia:** Cada 7 días (604800 segundos)
 - **Destino:** `./backups`
-- **Archivo generado:**  
-  `odoo_backup_YYYY-MM-DD_HH-MM.dump`
+- **Archivo generado:**  `odoo_backup_YYYY-MM-DD_HH-MM.dump`
   
 ## 🚀 Instrucciones de uso
 Dar permiso a las capertas de odoo_data y postgres_data para evitar posibles errores
