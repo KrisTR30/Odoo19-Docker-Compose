@@ -9,7 +9,7 @@ Incluye:
 - Base de datos **PostgreSQL16**
 - Panel de administración **PgAdmin4**
 - Contenedor de **Odoo19**
-- Tarea de **respaldo automático** semanal (`pg_dump`)
+- Tarea de **respaldo automático** (`pg_dump`)
 
 ## 📂Estructura del proyecto
 
