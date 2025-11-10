@@ -1,6 +1,6 @@
 # Odoo19 con PostgreSQL, PgAdmin y Backup Automático en Docker Compose usando Ubuntu/Ubuntu Sever
 
-Este proyecto despliega un entorno completo de **Odoo19** utilizando **Docker Compose**, junto con **PostgreSQL**, **PgAdmin4** y un **servicio de backup automático** diario de la base de datos (Elimina los backups con mas de 7 dias).
+Este proyecto despliega un entorno completo de **Odoo19** utilizando **Docker Compose**, junto con **PostgreSQL**, **PgAdmin4** y un **servicio de backup automático** semanal de la base de datos.
 
 ## Descripción del proyecto
 
@@ -91,13 +91,10 @@ Incluye:
     volumes:
       - ./backups:/backups
     entrypoint: >
-  	  /bin/bash -c "
-	    echo '0 3 * * 0 root PGPASSWORD=odoo pg_dump -h db -U odoo -Fc postgres > /backups/odoo_backup_$(date +\%Y-\%m-\%d_\%H-\%M).dump && find /backups -type f -mtime +7 -delete' > /etc/cron.d/pg-backup &&
-  	# Cambiar contraseña del PGPASSWORD debe ser la misma que el del servicio db
-	    chmod 0644 /etc/cron.d/pg-backup &&
-	    crontab /etc/cron.d/pg-backup &&
-	    cron -f
-	  "
+  	 bash -c "while true; do
+        pg_dump -h db -U odoo -Fc postgres > /backups/odoo_backup_$(date +%Y-%m-%d_%H-%M).dump;
+        sleep 604800;
+      done"
     restart: always
   ```
 ## ⚙️Configuración de servicios
@@ -127,6 +124,7 @@ Incluye:
   
 ### 💾 Backup automático
 - **Imagen:** `postgres:16`
+- **Frecuencia:** `1 vez por semana (604800 segundos)`
 - **Destino:** `./backups`
 - **Archivo generado:**  `odoo_backup_YYYY-MM-DD_HH-MM.dump`
   
